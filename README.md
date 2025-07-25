@@ -11,4 +11,6 @@
 + 点击参数可以添加参数：
 <img width="2841" height="1482" alt="image" src="https://github.com/user-attachments/assets/f5ebdeb2-1676-440a-8376-ba00c4128b59" />
 
+我将安装部分都删除了，我认为开发环境不需要那么麻烦，这种定制结果必然都是自己使用，调试好了直接注册com就可以使用了，不考虑安装问题。
+
 具体好不好用等更新了再说哈哈哈
