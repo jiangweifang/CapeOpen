@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -48,6 +49,28 @@ namespace CapeOpen
             return typeof(CapeObjectBase).Assembly;
         }
 
+        /// <summary>
+        /// Event triggered when a new parameter is being added to the collection.
+        /// </summary>
+        public event AddingNewEventHandler Parameters_AddingNew;
+
+        /// <summary>
+        /// Occurs when the list of parameters changes.
+        /// </summary>
+        /// <remarks>This event is triggered whenever there is a change in the parameters list, such as
+        /// adding, removing, or updating an item. Subscribers can handle this event to respond to changes in the
+        /// list.</remarks>
+        public event ListChangedEventHandler Parameters_ListChanged;
+
+        private void m_Parameters_AddingNew(object sender, AddingNewEventArgs e)
+        {
+            Parameters_AddingNew?.Invoke(sender, e);
+        }
+
+        private void m_Parameters_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            Parameters_ListChanged?.Invoke(sender, e);
+        }
 
         /// <summary>
         ///	Displays the PMC graphic interface, if available.
@@ -171,6 +194,8 @@ namespace CapeOpen
             : base()
         {
             m_Parameters = new ParameterCollection();
+            m_Parameters.AddingNew += new AddingNewEventHandler(m_Parameters_AddingNew);
+            m_Parameters.ListChanged += new ListChangedEventHandler(m_Parameters_ListChanged);
             this.m_SimulationContext = null;
             this.m_ValidationMessage = "This object has not been validated.";
             _disposed = false;
@@ -205,6 +230,8 @@ namespace CapeOpen
             : base(name)
         {
             m_Parameters = new ParameterCollection();
+            m_Parameters.AddingNew += new AddingNewEventHandler(m_Parameters_AddingNew);
+            m_Parameters.ListChanged += new ListChangedEventHandler(m_Parameters_ListChanged);
             this.m_SimulationContext = null;
             this.m_ValidationMessage = "This object has not been validated.";
             _disposed = false;
@@ -229,6 +256,8 @@ namespace CapeOpen
             : base(name, description)
         {
             m_Parameters = new ParameterCollection();
+            m_Parameters.AddingNew += new AddingNewEventHandler(m_Parameters_AddingNew);
+            m_Parameters.ListChanged += new ListChangedEventHandler(m_Parameters_ListChanged);
             this.m_SimulationContext = null;
             this.m_ValidationMessage = "This object has not been validated.";
             _disposed = false;
@@ -257,6 +286,8 @@ namespace CapeOpen
             {
                 m_Parameters.Add((CapeParameter)parameter.Clone());
             }
+            m_Parameters.AddingNew += new AddingNewEventHandler(m_Parameters_AddingNew);
+            m_Parameters.ListChanged += new ListChangedEventHandler(m_Parameters_ListChanged);
             this.m_ValidationMessage = "This object has not been validated.";
             _disposed = false;
         }
@@ -477,7 +508,7 @@ namespace CapeOpen
         /// <exception cref ="ECapeUnknown">The error to be raised when other error(s),  specified for this operation, are not suitable.</exception>
         /// <exception cref = "ECapeFailedInitialisation">ECapeFailedInitialisation</exception>
         /// <exception cref = "ECapeNoImpl">ECapeNoImpl</exception>
-        //[System.ComponentModel.EditorAttribute(typeof(ParameterCollectionEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [System.ComponentModel.EditorAttribute(typeof(ParameterCollectionEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [System.ComponentModel.CategoryAttribute("Parameter Collection")]
         [System.ComponentModel.TypeConverter(typeof(ParameterCollectionTypeConverter))]
         public ParameterCollection Parameters

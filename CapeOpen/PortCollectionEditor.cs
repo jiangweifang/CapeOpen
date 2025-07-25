@@ -15,17 +15,7 @@ namespace CapeOpen
 
         protected override object CreateInstance(Type itemType)
         {
-            return new UnitPort("输入端口1", "输入端口1", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL);
-        }
-
-        protected override CollectionForm CreateCollectionForm()
-        {
-            return base.CreateCollectionForm();
-        }
-
-        protected override Type[] CreateNewItemTypes()
-        {
-            return base.CreateNewItemTypes();
+            return new UnitPort("新建端口", "备注", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL);
         }
     }
 }

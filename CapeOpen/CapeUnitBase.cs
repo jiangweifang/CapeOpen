@@ -127,11 +127,13 @@ namespace CapeOpen
             : base()
         {
             m_Ports = new PortCollection();
-            m_Ports.AddingNew += new System.ComponentModel.AddingNewEventHandler(m_Ports_AddingNew);
-            m_Ports.ListChanged += new System.ComponentModel.ListChangedEventHandler(m_Ports_ListChanged);
+            m_Ports.AddingNew += new AddingNewEventHandler(m_Ports_AddingNew);
+            m_Ports.ListChanged += new ListChangedEventHandler(m_Ports_ListChanged);
             m_ValStatus = CapeValidationStatus.CAPE_NOT_VALIDATED;
-            m_Reports = new System.Collections.Generic.List<String>();
-            m_Reports.Add("Default Report");
+            m_Reports = new List<string>
+            {
+                "Default Report"
+            };
             m_selecetdReport = "Default Report";
         }
 
@@ -264,7 +266,7 @@ namespace CapeOpen
         /// <param name = "args">A <see cref = "System.ComponentModel.ListChangedEventArgs">System.ComponentModel.ListChangedEventArgs</see> that provides information about the name change.</param>
         void m_Ports_ListChanged(object sender, System.ComponentModel.ListChangedEventArgs args)
         {
-            OnPortCollectionListChanged(args);
+            PortCollectionListChanged?.Invoke(sender, args);
         }
 
         /// <summary>
@@ -279,7 +281,7 @@ namespace CapeOpen
         /// <param name = "args">A <see cref = "System.ComponentModel.AddingNewEventArgs">System.ComponentModel.AddingNewEventArgs</see> that provides information about the name change.</param>
         void m_Ports_AddingNew(object sender, System.ComponentModel.AddingNewEventArgs args)
         {
-            OnPortCollectionAddingNew(args);
+            PortCollectionAddingNew?.Invoke(sender, args);
         }
 
         /// <summary>
@@ -290,44 +292,10 @@ namespace CapeOpen
         public event System.ComponentModel.ListChangedEventHandler PortCollectionListChanged;
 
         /// <summary>
-        /// Occurs when the list or an item in the list changes.
-        /// </summary>
-        /// <remarks>ListChanged notifications for item value changes are only raised if the 
-        /// list item type implements the INotifyPropertyChanged interface.</remarks> 
-        /// <param name = "args">A <see cref = "System.ComponentModel.ListChangedEventArgs">System.ComponentModel.ListChangedEventArgs</see> that contains information about the event.</param>
-        protected void OnPortCollectionListChanged(System.ComponentModel.ListChangedEventArgs args)
-        {
-            if (PortCollectionListChanged != null)
-            {
-                PortCollectionListChanged(this, args);
-            }
-        }
-
-        /// <summary>
         /// Occurs when the user Adds a new element to the port collection.
         /// </summary>
         /// <remarks>The event to be handles when the name of the PMC is changed.</remarks> 
         public event System.ComponentModel.AddingNewEventHandler PortCollectionAddingNew;
-
-        /// <summary>
-        /// Occurs before an item is added to the list.
-        /// </summary>
-        /// <remarks>
-        /// The AddingNew event occurs before a new object is added to the collection 
-        /// represented by the Items property. This event is raised after the AddNew method is 
-        /// called, but before the new item is created and added to the internal list. By 
-        /// handling this event, the programmer can provide custom item creation and insertion 
-        /// behavior without being forced to derive from the BindingList&gt;T&lt; class. 
-        /// </remarks>
-        /// <param name = "args">A <see cref = "System.ComponentModel.AddingNewEventArgs">System.ComponentModel.AddingNewEventArgs</see> that contains information about the event.</param>
-        protected void OnPortCollectionAddingNew(System.ComponentModel.AddingNewEventArgs args)
-        {
-            if (PortCollectionAddingNew != null)
-            {
-                PortCollectionAddingNew(this, args);
-            }
-        }
-
 
         /// <summary>
         /// Occurs when the user validates the unit operation.

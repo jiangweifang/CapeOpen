@@ -94,11 +94,10 @@
     <Compile Include="MaterialObjectWrapper.cs" />
     <Compile Include="MaterialObjectWrapper1.cs" />
     <Compile Include="MaterialObjectWrapper11.cs" />
-    <Compile Include="MixerExample.cs" />
-    <Compile Include="MixerExample110.cs" />
     <Compile Include="MonitoringInterfaces.cs" />
     <Compile Include="OptionParameter.cs" />
     <Compile Include="ParameterCollection.cs" />
+    <Compile Include="ParameterCollectionEditor.cs" />
     <Compile Include="ParameterIDL.cs" />
     <Compile Include="PersistenceInterfacesIDL.cs" />
     <Compile Include="PetroFractionsIDL.cs" />
