@@ -281,6 +281,9 @@ namespace CapeOpen
             : base((CapeIdentification)objectToBeCopied)
         {
             m_SimulationContext = objectToBeCopied.m_SimulationContext;
+            // 这里我不确定这样做对不对
+            m_Parameters.AddingNew -= new AddingNewEventHandler(m_Parameters_AddingNew);
+            m_Parameters.ListChanged -= new ListChangedEventHandler(m_Parameters_ListChanged);
             m_Parameters.Clear();
             foreach (CapeParameter parameter in objectToBeCopied.Parameters)
             {
