@@ -31,6 +31,16 @@ namespace CapeOpen
             InitializeComponent();
             m_Unit = unit;
             this.propertyGrid1.SelectedObject = unit;
+
+            if (unit.Ports is PortCollection ports)
+            {
+                ports.AddingNew += Ports_AddingNew;
+            }
+        }
+        private void Ports_AddingNew(object sender, AddingNewEventArgs e)
+        {
+            // 这里编写你希望在“添加”按钮点击时执行的逻辑
+            
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

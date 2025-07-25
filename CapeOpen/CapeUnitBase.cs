@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 
@@ -46,6 +48,7 @@ namespace CapeOpen
     //  IPersistStream,
     //  IPersistStreamInit
     {
+        
         private PortCollection m_Ports;
         private CapeValidationStatus m_ValStatus;
         // private bool m_dirty;
@@ -585,6 +588,7 @@ namespace CapeOpen
         /// <exception cref = "ECapeFailedInitialisation">ECapeFailedInitialisation</exception>
         /// <exception cref = "ECapeBadInvOrder">ECapeBadInvOrder</exception>
         //        [System.ComponentModel.EditorAttribute(typeof(capePortCollectionEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(PortCollectionEditor), typeof(UITypeEditor))]
         [System.ComponentModel.CategoryAttribute("ICapeUnit")]
         [System.ComponentModel.DescriptionAttribute("Unit Operation Port Collection. Click on the (...) button to edit collection.")]
         [System.ComponentModel.TypeConverter(typeof(PortCollectionTypeConverter))]
