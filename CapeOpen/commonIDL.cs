@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 // This idl file was ported from the CAPE-OPEN common.idl file and 
@@ -590,7 +592,6 @@ namespace CapeOpen
         IDisposable,
         ICloneable,
         System.ComponentModel.INotifyPropertyChanged
-        
     {
         /// <summary>
         /// The name of the component.
@@ -908,6 +909,7 @@ namespace CapeOpen
                 OnComponentDescriptionChanged(args);
             }
         }
+        
     };
 
 

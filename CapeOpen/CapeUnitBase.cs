@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace CapeOpen
@@ -43,9 +47,9 @@ namespace CapeOpen
         ICapeUnit,
         ICapeUnitCOM,
         ICapeUnitReport,
-        ICapeUnitReportCOM
+        ICapeUnitReportCOM,
+        IPersistStream
     //  IPersist,
-    //  IPersistStream,
     //  IPersistStreamInit
     {
         
@@ -1231,6 +1235,29 @@ namespace CapeOpen
                 retVal = String.Concat(retVal, Environment.NewLine);
             }
             return retVal;
+        }
+
+        public void GetClassID(out Guid pClassID)
+        {
+            pClassID = GetType().GUID;
+        }
+
+        public int IsDirty()
+        {
+            return 1;
+        }
+
+        public void Load(IStream pStm)
+        {
+        }
+
+        public void Save(IStream pStm, [In, MarshalAs(UnmanagedType.Bool)] bool fClearDirty)
+        {
+        }
+
+        public void GetSizeMax(out long pcbSize)
+        {
+            pcbSize = 0;
         }
     };
 }
